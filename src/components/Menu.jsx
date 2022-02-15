@@ -1,8 +1,9 @@
 import React from 'react';
+import uuid from 'react-uuid';
 import { Navbar, Offcanvas, Container, Nav } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { PaginasApp } from '../data/PaginasApp';
-import uuid from 'react-uuid';
+import { BOOTSTRAP_LG_SIZE } from '../data/Constants';
 import './menu.css';
 
 class Menu extends React.Component {
@@ -21,7 +22,7 @@ class Menu extends React.Component {
 
   render() {
     let options;
-    if (this.state.width < 1500) {
+    if (this.state.width < BOOTSTRAP_LG_SIZE) {
       options = (
         <>
           <Navbar.Toggle aria-controls="offcanvasNavbar" />

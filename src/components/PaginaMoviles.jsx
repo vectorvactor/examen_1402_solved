@@ -1,16 +1,8 @@
 import React from 'react';
 import uuid from 'react-uuid';
-import {
-  Card,
-  Container,
-  Table,
-  Row,
-  Col,
-  ListGroup,
-  ListGroupItem,
-} from 'react-bootstrap';
+import { Container, Table, Row, Col } from 'react-bootstrap';
 import FormMarcas from './FormMarcas';
-import Boton from './Boton';
+import CardMovil from './CardMovil';
 import { BASE_API_URL } from '../data/Constants';
 import './table.css';
 
@@ -45,13 +37,13 @@ class PaginaMoviles extends React.Component {
     const response = await fetch(BASE_API_URL + endpointURL);
     const responseData = await response.json();
     const parsedData = responseData.data.phones.map((item) => {
-      const fila = {
+      const row = {
         brand:
           item.brand !== undefined ? item.brand : item.phone_name.split(' ')[0],
         phone_name: item.phone_name,
         slug: item.slug,
       };
-      return fila;
+      return row;
     });
     this.setState({
       tableData: parsedData,
@@ -119,35 +111,11 @@ class PaginaMoviles extends React.Component {
               </Table>
             </Col>
             <Col lg={4} md={6}>
-              <Card style={{ width: '18rem' }}>
-                <Card.Img
-                  variant="top"
-                  src={this.state.selectedItem.thumbnail}
-                />
-                <Card.Body>
-                  <Card.Title>
-                    {this.state.selectedItem.brand}{' '}
-                    {this.state.selectedItem.phone_name}
-                  </Card.Title>
-                </Card.Body>
-                <ListGroup className="list-group-flush">
-                  <ListGroupItem>
-                    Almacenamiento: {this.state.selectedItem.storage}
-                  </ListGroupItem>
-                  <ListGroupItem>
-                    Dimensiones: {this.state.selectedItem.dimension}
-                  </ListGroupItem>
-                  <ListGroupItem>
-                    SO: {this.state.selectedItem.os}
-                  </ListGroupItem>
-                  <ListGroupItem>
-                    <Boton
-                      text="Añadir a favoritos"
-                      onClickButton={this.addFavourites}
-                    />
-                  </ListGroupItem>
-                </ListGroup>
-              </Card>
+              <CardMovil
+                cardItem={this.state.selectedItem}
+                onClickCard={this.addFavourites}
+                buttonText="Añadir a favoritos"
+              />
             </Col>
           </Row>
         </Container>

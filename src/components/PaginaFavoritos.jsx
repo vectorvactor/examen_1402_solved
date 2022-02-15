@@ -8,7 +8,7 @@ import {
   ListGroup,
   ListGroupItem,
 } from 'react-bootstrap';
-import Boton from './Boton';
+import CardMovil from './CardMovil';
 
 class PaginaFavoritos extends React.Component {
   constructor(props) {
@@ -60,31 +60,11 @@ class PaginaFavoritos extends React.Component {
             {this.state.favouritesList.map((item) => {
               return (
                 <Col key={uuid()} lg={4} md={6}>
-                  <Card style={{ width: '18rem' }}>
-                    <Card.Img variant="top" src={item.thumbnail} />
-                    <Card.Body>
-                      <Card.Title>
-                        {item.brand} {item.phone_name}
-                      </Card.Title>
-                    </Card.Body>
-                    <ListGroup className="list-group-flush">
-                      <ListGroupItem>
-                        Almacenamiento: {item.storage}
-                      </ListGroupItem>
-                      <ListGroupItem>
-                        Dimensiones: {item.dimension}
-                      </ListGroupItem>
-                      <ListGroupItem>SO: {item.os}</ListGroupItem>
-                      <ListGroupItem>
-                        <Boton
-                          text="Eliminar de favoritos"
-                          onClickButton={() =>
-                            this.removeFavourite(item.phone_name)
-                          }
-                        />
-                      </ListGroupItem>
-                    </ListGroup>
-                  </Card>
+                  <CardMovil
+                    cardItem={item}
+                    onClickCard={() => this.removeFavourite(item.phone_name)}
+                    buttonText="Eliminar de favoritos"
+                  />
                 </Col>
               );
             })}
