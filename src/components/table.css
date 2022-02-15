@@ -1,0 +1,8 @@
+table tbody tr {
+  cursor: pointer;
+}
+
+.card-img,
+.card-img-top {
+  width: 150px;
+}
